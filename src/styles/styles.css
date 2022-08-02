@@ -1,0 +1,27 @@
+/*@import "~normalize.css";*/
+/*@import "roboto.css";*/
+
+body {
+    font-family: 'Roboto', sans-serif;
+}
+
+.container {
+    padding-top: 2rem;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+h1{
+    text-align: center;
+}
+.logo{
+    background-image: url("../assets/banner.png");
+    background-size: cover;
+    width: 200px;
+    height: 200px;
+    margin: 0 auto;
+}
+.code {
+    color: red;
+}
