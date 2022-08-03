@@ -1,10 +1,9 @@
-import './babel'
 import './styles/styles.css'
 import './styles/less.less'
 
 import React, {useState} from 'react'
 import {createRoot} from 'react-dom/client'
-import testDB from './server/db.json'
+import testDB from '../server/db.json'
 const [db] = Object.values(testDB);
 
 
