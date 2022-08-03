@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import testDB from '../server/db.json'
+import testDB from '../../server/db.json'
 const [db] = Object.values(testDB);
 
 
