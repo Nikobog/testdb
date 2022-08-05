@@ -1,23 +1,26 @@
 
 import './App.css';
-import { http } from "../../http/httpApi";
+import { http } from "../../services/httpApi";
 import {useState, useEffect} from "react";
-
+import { Fruits } from './Fruits'
 
 function App() {
+    const [count1, setCount1] = useState(0)
     const [count, setCount] = useState(0)
-
-    const [viewTable, setViewTable] = useState(false)
-    useEffect(() => {
-        if(!viewTable) {http().then(data => (setViewTable(data)))}
-    })
+    //
+    // useEffect(() => {
+    //     console.log(1111111, 'did render', count)
+    //
+    //     return () => {
+    //         console.log(22222, 'cleanup', count)
+    //     }
+    // }, [count])
 
     return (
         <div className="App">
+            <button onClick={() => setCount1(count1+1)}>Rerender</button>
             <button onClick={() => setCount(count+1)}>{String(count)}</button>
-            {Object.values(viewTable).map((e,i) => (
-                <div key={i}><span>{e.genus}</span><span>{e.name}</span></div>
-            ))}
+            <Fruits />
         </div>
     );
 }
