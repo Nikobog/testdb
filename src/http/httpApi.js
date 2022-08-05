@@ -1,6 +1,6 @@
-import { $host } from "./index";
+import { $http } from "./index";
 
-export const check = async () => {
-    const {data} = await $host.get('fruits',)
+export const http = async () => {
+    const {data} = await $http.get('fruits',)
     return data;
 }

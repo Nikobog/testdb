@@ -1,21 +1,25 @@
-import logo from '../../logo.svg';
+
 import './App.css';
-import { check } from "../../http/dataApi";
+import { http } from "../../http/httpApi";
+import {useState, useEffect} from "react";
 
 
 function App() {
+    const [count, setCount] = useState(0)
 
-  check().then(data => {
-    console.log(data)
-  })
+    const [viewTable, setViewTable] = useState(false)
+    useEffect(() => {
+        if(!viewTable) {http().then(data => (setViewTable(data)))}
+    })
 
-
-  //
-  return (
-    <div className="App">
-
-    </div>
-  );
+    return (
+        <div className="App">
+            <button onClick={() => setCount(count+1)}>{String(count)}</button>
+            {Object.values(viewTable).map((e,i) => (
+                <div key={i}><span>{e.genus}</span><span>{e.name}</span></div>
+            ))}
+        </div>
+    );
 }
 
 export default App;
