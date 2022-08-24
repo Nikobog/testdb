@@ -2,10 +2,10 @@ const exchange = [
     {"unit":"m","value":1},
     {"unit":"sm","value":100},
     {"unit":"ft","value":3.2808},
-    /*{"unit":"mm","value":1000},
+    {"unit":"mm","value":1000},
     {"unit":"km","value":0.001},
     {"unit":"in","value":39.37},
-    {"unit":"yd","value":1.0936} */
+    {"unit":"yd","value":1.0936}
 ]
 let calculator = document.getElementById('calculator')
 
@@ -16,14 +16,11 @@ function createSteps(stepName, anotherStepName) {
         return el
     }
     let step = crElem('div', stepName)
-    let btns = crElem('div', stepName+ '-btns btns')
-    let res  = crElem('div', stepName+ '-res')
-    let un   = crElem('span', stepName + '-un')
-    let inp  = crElem('input', stepName + '-inp')
+    let btns = crElem('div', `${stepName}-btns btns`)
+    let res  = crElem('div', `${stepName}-res`)
+    let un   = crElem('span', `${stepName}-un`)
+    let inp  = crElem('input', `${stepName}-inp`)
     inp.addEventListener('change', function (){
-        function testVal(val) {
-            return (/^\d+\.\d+$/.test(val) || /^\d+$/.test(val)) ? val : false
-        }
         let inpVal = testVal(this.value)
         if(!inpVal){
             for(let i=1; i<this.value.length; i++){
@@ -33,16 +30,14 @@ function createSteps(stepName, anotherStepName) {
             }
         }
         this.value = inpVal
-        calcCheck({
-            "distance": {
-                "unit": calculator.querySelector('.from .btn-act').getAttribute('ex'),
-                "value": inpVal
-            },
-            "convert_to": calculator.querySelector('.to .btn-act').getAttribute('ex')
-        })
+
+        function testVal(val) {
+            return (/^\d+\.\d+$/.test(val) || /^\d+$/.test(val)) ? val : false
+        }
+        calcCheckInput( inpVal )
     })
     inp.value = 1
-    if(stepName == 'to'){inp.setAttribute('disabled', true)}
+    if(stepName != 'from'){inp.setAttribute('disabled', true)}
 
     res.append( inp, un )
 
@@ -96,8 +91,21 @@ function checkInput ( input, val ) {
     if(input.value != val){changeInput(input, val)}
 }
 
+function calcCheckInput( value ) {
+    let unit = calculator.querySelector('.from .btn-act').getAttribute('unit')
+    let convTo = calculator.querySelector('.to .btn-act').getAttribute('unit')
+    calcCheck({
+        "distance": {
+            "unit": unit,
+            "value": value
+        },
+        "convert_to": convTo
+    })
+}
+
 function calcCheck( req, another ) {
-    console.log(req)
+    console.log('Задача №1')
+    console.log('Входящие параметры: ',req)
     let distVal = '';
     let convertTo = '';
     let distUnit ='';
@@ -127,7 +135,8 @@ function calcCheck( req, another ) {
             res = calc()
             break;
     }
-    console.log(res)
+    console.log('Выходные данные: ',res)
+    console.log('-=-=-=-=-=-=-=-=-')
     return res
 }
 
@@ -145,9 +154,6 @@ function calc( ){
     return {"unit": toEx.getAttribute('unit'), "value": res}
 }
 
-// let enterJSON = { "distance": {"unit": "m", "value": 0.5}, "convert_to": "ft"}
-// let enterJSON = { "distance": {"unit": "", "value": ""}, "convert_to": ""}
-let enterJSON = { "distance": {"u": "", "val": 2.5}, "convert_to": "sm"}
+let enterJSON = { "distance": {"unit": "m", "value": 0.5}, "convert_to": "ft"}
 
 calcCheck(enterJSON)
-// calcCheck()

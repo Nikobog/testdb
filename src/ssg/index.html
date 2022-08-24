@@ -10,6 +10,7 @@
         #calculator{
             display: flex;
             justify-content: left;
+            margin-bottom: 100px;
         }
         #calculator > div{
             display: flex;
@@ -61,12 +62,37 @@
             color: #000;
             font-size: 36px;
         }
+        #search{
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-auto-rows: 100px;
+        }
+        #search .enter_data,
+        #search .result_data{
+            display: grid;
+            grid-template-columns: repeat(3, 0.5fr);
+            grid-auto-rows: 60px;
+        }
+        #search .enter_data + div{padding-left: 30px;}
+        #search .title{
+            grid-column-start: 1;
+            grid-column-end: 4;
+            font-weight: bold;
+            font-size: 24px;
+            line-height: 60px;
+        }
+
+        #search span:first-child{font-weight: bold;margin-right: 10px;}
     </style>
 </head>
 <body>
     <div id="calculator"></div>
-    <div id="search"></div>
     <script type="application/javascript" src="calculator.js"></script>
+    <div id="search"></div>
     <script type="application/javascript" src="search.js"></script>
+    <div id="point"></div>
+    <script type="application/javascript" src="points.js"></script>
+    <div id="question"></div>
+    <script type="application/javascript" src="question.js"></script>
 </body>
 </html>
